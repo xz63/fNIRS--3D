@@ -44,12 +44,7 @@ classdef FNIR23DX <hgsetget
         end
         
         
-        function M=getValue(x,beta,fn);
-            x.V.fname=[fn '.nii'];
-            %            if exist(x.V.fname); return; end
-            %            fid=fopen(x.V.fname,'w');
-            %            fprintf(fid,'s');
-            %            fclose(fid);
+        function M=getValue(x,beta);
             for i=1:size(beta,2);
                 v = griddatan([x.x(:) x.y(:) x.z(:)], beta(:,i), [x.xi(:)  x.yi(:)  x.zi(:)] );
                 M=x.img*NaN;
@@ -60,7 +55,7 @@ classdef FNIR23DX <hgsetget
                 end
             end
         end
-        function x=save(x,fn,M);
+        function x=save(x,fn,M); %fn is file name without extension
             x.V.fname=[fn '.nii'];
 	    if exist(x.V.fname); return;end
             for i=1:size(M,4);
